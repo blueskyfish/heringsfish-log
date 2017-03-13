@@ -1,0 +1,22 @@
+#
+# Heringsfish Log - https://github.com/blueskyfish/heringsfish-log.git
+#
+# Copyright (c) 2017 BlueSkyFish
+#
+# EditorConfig is awesome: http://EditorConfig.org
+#
+
+# top-most EditorConfig file
+root = true
+
+# All Files
+[*]
+indent_style = space
+indent_size = 2
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+
+# Markdown Files
+[*.md]
+indent-size = 4

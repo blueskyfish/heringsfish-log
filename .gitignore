@@ -1,0 +1,20 @@
+#
+# Heringsfish Log - https://github.com/blueskyfish/heringsfish-log.git
+#
+# Copyright (c) 2017 BlueSkyFish
+#
+
+
+# Jetbrains
+.idea
+*.iml
+
+
+# Node & Co
+node_modules/
+npm-debug.log
+
+
+# MAC
+*~
+.DS_Store
