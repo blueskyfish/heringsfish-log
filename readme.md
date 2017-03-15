@@ -5,16 +5,27 @@
 
 > A small tool for watch the server log from Payara / Glassfish application server. It works together with heringsfish-cli
 
+## Table of Content
 
-## Install / Usage
+* [Installation](#user-content-installation)
+* [Usage](#user-content-usage)
+* [Config over server-config.json](#user-content-config-over-server-config-json)
+* [Log Formats](#user-content-log-formats)
+    * [(ODL) Oracle Diagnostics Logging](#user-content-odl-oracle-diagnostics-logging)
+    * [(ULF) Unified Logging Format](#user-content-ulf-unified-logging-format)
+    * [(JSON) Json Format](#user-content-json-json-format)
+* [History](#user-content-history)
+* [License](#user-content-license)
+* [Third Party](#user-content-third-party)
 
-**Installation**
+
+## Installation
 
 ```bash
 $ npm install -global heringsfish-log
 ```
 
-**Usage**
+## Usage
 
 * without arguments:<br>
   The `hflog` search in the current working directory to file `server-config.json` or `server.log`.
@@ -31,7 +42,7 @@ $ npm install -global heringsfish-log
 The `hflog` can startet on two manner:
 
 1. With Heringsfish-Cli together<br>
-  It use the file `server-config.json` for getting the information.
+   It use the file `server-config.json` for getting the information.
 
 ```bash
 $ cd /path/of/heringsfish-cli/project
@@ -41,12 +52,39 @@ $ open "http://localhost:40000/"
 ```
 
 2. Single Mode<br>
-  All arguments are required
+   All arguments are required
 
 ```bash
-$ hflog --port=40000m --file=/path/to/server.log --format=odl
+$ hflog --port=40000 --file=/path/to/server.log --format=odl
 ```
 
+## Config over `server-config.json`
+
+Starting the `hflog` in a directory that contain a heringsfish cli configuration (a file `server-config.json`), it reads
+all parameters from the configuration.
+
+* Find the port for the browser location from the property `domain.ports.base` + 21 in the `server-config.json`.
+* Find the file `server.log` from the properties `domain.home` + `domain.name` in the `server-config.json`.
+
+**Example**
+
+```json
+{
+  "name": "demo-service",
+  ...
+  "domain": {
+    "home": "{user.home}/var/domains",
+    "name": "demo",
+    "ports": {
+      "base": "10000"
+    }
+  }
+  ...
+}
+```
+
+* Browser <http://localhost:10021>
+* Watch the file `{user.home}/var/domains/demo/logs/server.log`.
 
 ## Log Formats
 
@@ -106,7 +144,7 @@ The Payara or Glassfish Application Server knowns 3 formats for the logging.
 ```
 
 
-### (ULF) Uniform Log Formatter 
+### (ULF) Unified Logging Format
 
 
 ```
@@ -168,6 +206,11 @@ The Payara or Glassfish Application Server knowns 3 formats for the logging.
 {"_Timestamp":"2017-03-09T21:21:20.175+0100","_Level":"INFO","_Version":"Payara 4.1","_LoggerName":"javax.enterprise.system.core","_ThreadID":"20","_ThreadName":"RunLevelControllerThread-1489090879160","_TimeMillis":"1489090880175","_LevelValue":"800","_MessageID":"NCLS-CORE-00087","_LogMessage":"Grizzly Framework 2.3.28 started in: 50ms - bound to [\/0.0.0.0:48080]"}
 ```
 
+## History
+
+| Date       | Version  | Description
+|------------|:--------:|--------------------------------------------------------
+| 2017-03-13 | 0.0.1    | Initial commit<br>Missing Evaluate the parameters<br>Missing frontend
 
 ## License
 
@@ -194,3 +237,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ```
+
+## Third Party
+
+All company, brand and product names are trademarks of their respective owners.

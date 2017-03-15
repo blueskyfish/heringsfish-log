@@ -8,39 +8,23 @@
 
 'use strict';
 
+
+const CONSTANTS = require('./hf/constants');
+const logger    = require('./hf/logger');
+const initialize = require('./hf/initialize');
+
 (function (projectPath, currentPath, argv) {
 
-  const fs       = require('fs');
+  const settings = initialize(projectPath, currentPath, argv);
 
-  const minimist = require('minimist');
-
-  const app       = require('./hf/application');
-  const logger    = require('./hf/logger');
-  const CONSTANTS = require('./hf/constants');
-
-
-  // Parameters / Arguments ??
-
-  const params = minimist(argv);
-
-  const file = params.file;
-
-  if (!file || !fs.existsSync(file)) {
-    logger.warn('Server Log is missing (%s)', file);
+  if (!settings) {
+    logger.warn('Error: could not load the "hflog"...');
     process.exit(1);
-    return;
   }
 
-  /**
-   * @type {ApplicationOptions}
-   */
-  const appOptions = {
-    file: file,
-    port: params.port,
-    line: params.line,
-    format: params.format || CONSTANTS.FORMAT_ODL
-  };
+  const startApp = require('./hf/application');
 
-  app.run(projectPath, currentPath, appOptions)
+  startApp(projectPath, currentPath, settings)
 
 } (__dirname, process.cwd(), process.argv.slice(2)));
+
