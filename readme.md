@@ -3,7 +3,7 @@
 
 # Heringsfish Log
 
-> A small tool for watch the server log from Payara / Glassfish application server. It works together with heringsfish-cli
+> A small tool for watch the server log from Payara / Glassfish application server. It works together with [heringsfish-cli](https://github.com/blueskyfish/heringsfish-cli).
 
 ## Table of Content
 
