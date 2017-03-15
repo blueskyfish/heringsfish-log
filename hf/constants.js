@@ -91,6 +91,25 @@ Object.defineProperty(CONSTANTS, 'FORMAT_UFL', {
   value: 'UFL'
 });
 
+Object.defineProperty(CONSTANTS, 'DEFAULT_SERVER_PORT', {
+  enumerable: true,
+  writable: false,
+  configurable: false,
+  value: 4201
+});
 
+Object.defineProperty(CONSTANTS, 'DEFAULT_ENCODING', {
+  enumerable: true,
+  writable: false,
+  configurable: false,
+  value: 'utf8'
+});
+
+Object.defineProperty(CONSTANTS, 'DEFAULT_TAIL_LINE', {
+  enumerable: true,
+  writable: false,
+  configurable: false,
+  value: 50
+});
 
 module.exports = CONSTANTS;

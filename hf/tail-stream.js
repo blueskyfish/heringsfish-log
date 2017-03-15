@@ -9,15 +9,14 @@
 const spawn    = require('child_process').spawn;
 const Readable = require('stream').Readable;
 
-const DEFAULT_LINE = 300;
-const DEFAULT_ENCODING = 'utf8';
+const CONSTANTS = require('./constants');
 
 const COMMAND = 'tail';
 
 /**
  * @name TailOptions
  * @property {string} file
- * @property {number} [line]
+ * @property {number} line
  * @property {string} cwd
  * @property {object} env
  */
@@ -31,7 +30,7 @@ module.exports = function (options) {
 
   const cmdParams = [
     '-f',
-    '-n', options.line || DEFAULT_LINE,
+    '-n', options.line,
     options.file
   ];
 
@@ -40,16 +39,15 @@ module.exports = function (options) {
     env: options.env
   };
 
-
-  const tail = spawn(COMMAND, cmdParams, cmdOptions);
+  const cmdTail = spawn(COMMAND, cmdParams, cmdOptions);
 
   const reader = new Readable({
-    encoding: DEFAULT_ENCODING,
+    encoding: CONSTANTS.DEFAULT_ENCODING,
     read: function (size) {}
   });
 
-  tail.stdout.setEncoding(DEFAULT_ENCODING);
-  tail.stdout.on('data', (data) => {
+  cmdTail.stdout.setEncoding(CONSTANTS.DEFAULT_ENCODING);
+  cmdTail.stdout.on('data', (data) => {
     if (data instanceof Buffer) {
       data = data.toString();
     }
@@ -57,19 +55,19 @@ module.exports = function (options) {
   });
 
 
-  tail.stderr.setEncoding(DEFAULT_ENCODING);
-  tail.stderr.on('data', (data) => {
+  cmdTail.stderr.setEncoding(CONSTANTS.DEFAULT_ENCODING);
+  cmdTail.stderr.on('data', (data) => {
     if (data instanceof Buffer) {
       data = data.toString();
     }
     // TODO warning message from stderr output
   });
 
-  tail.on('error', (err) => {
+  cmdTail.on('error', (err) => {
     // TODO  warning message from tail error
   });
 
-  tail.on('close', (code) => {
+  cmdTail.on('close', (code) => {
     reader.push(null);
     // TODO info message from exist code of "tail"
   });
