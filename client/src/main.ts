@@ -1,4 +1,4 @@
-/*!
+/*
  * Heringsfish Log Client - https://github.com/blueskyfish/heringsfish-log-client.git
  *
  * The small browser client for the Payara (or Glassfish) application server.
