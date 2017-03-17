@@ -15,6 +15,7 @@ import { environment } from '../../environments/environment';
 import * as io from 'socket.io-client';
 
 import { LogEntry, ILogEntry } from "../shared/log-entry";
+import {BrowserService} from "./browser.service";
 
 @Injectable()
 export class SocketService {
@@ -26,8 +27,8 @@ export class SocketService {
 
   private _receiveMessage: EventEmitter<any> = new EventEmitter(true);
 
-  constructor(@Inject('Window') window: any) {
-    this._socketUrl = SocketService.buildSocketUrl(window);
+  constructor(@Inject(BrowserService) browser: BrowserService) {
+    this._socketUrl = SocketService.buildSocketUrl(browser);
     this._socketCount = 0;
     console.info('SocketURL %s', this._socketUrl);
   }
@@ -90,14 +91,19 @@ export class SocketService {
   }
 
 
-  private static buildSocketUrl(window: any): String {
+  private static buildSocketUrl(browser: BrowserService): String {
     if (environment.socketUrl) {
       return environment.socketUrl;
     }
 
-    const l: Location = window.location || {};
-    const port: number = window.socketPort || 5000;
+    const wnd = browser.window();
+    console.log('window.socketPort -> ', wnd.socketPort);
+    if (wnd) {
+      const l: Location = wnd.location || {};
+      const port: number = wnd.socketPort || 5000;
 
-    return (l.protocol || 'http') + "//" + (l.hostname || 'localhost') + ":" + port;
+      return (l.protocol || 'http') + "//" + (l.hostname || 'localhost') + ":" + port;
+    }
+    return 'http://localhost:4201'
   }
 }

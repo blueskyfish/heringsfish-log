@@ -58,8 +58,7 @@ function startApp(projectPath, currentPath, settings) {
 
   app.get('/app/index.html', (req, res) => {
     res.render('index.html', {
-      port: settings.serverPort,
-      baseUrl: 'http://localhost:' + settings.serverPort + '/app'
+      severPort: settings.serverPort
     });
   });
 

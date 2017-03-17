@@ -12,6 +12,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "hflog": "ng build --prod --env=prod --aot --base-href=/app/ --output-path=../app --progress --verbose --output-hashing=none --sourcemap",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

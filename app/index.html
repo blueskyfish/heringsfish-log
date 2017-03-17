@@ -1,17 +1,23 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <base href="{{baseUrl}}">
-  <title>Heringsfish</title>
+  <meta charset="utf-8">
+  <title>Heringsfish Log Viewer</title>
+  <base href="/app/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <script>
-    window.port = parseInt('{{port}}', 10);
+    var socketPort = parseInt('{{serverPort}}');
+    window.socketPort = isNaN(socketPort) ? 4201 : socketPort;
   </script>
-</head>
+<link href="styles.bundle.css" rel="stylesheet"/></head>
 <body>
-  <h1>Heringsfish</h1>
-</body>
+<app-root>
+  <div class="loading">
+    <img src="assets/logo.svg" width="144" height="auto" alt="Heringsfish Log" title="Heringsfish Log">
+    <h1>Heringsfish Log <small>v0.0.1</small></h1>
+    <p>Please wait ...</p>
+  </div>
+</app-root>
+<script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script></body>
 </html>

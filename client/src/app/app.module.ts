@@ -1,4 +1,4 @@
-/*!
+/*
  * Heringsfish Log Client - https://github.com/blueskyfish/heringsfish-log-client.git
  *
  * The small browser client for the Payara (or Glassfish) application server.
@@ -19,6 +19,7 @@ import { AppRoot } from './app-root.component';
 
 import { SocketService } from './service/socket.service';
 import { SettingService } from "./service/setting.service";
+import { BrowserService } from "./service/browser.service";
 
 import { NavBarComponent } from './component/nav-bar.component';
 import { MessageTableComponent } from './component/message-table.component';
@@ -46,6 +47,7 @@ import { ColumnStylePipe } from './pipe/column-style.pipe';
   providers: [
     SocketService,
     SettingService,
+    BrowserService,
     { provide: 'Window', useValue: window }
   ],
   bootstrap: [AppRoot]
