@@ -1,0 +1,17 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#" (click)="onClickBrand()">
+      <img src="assets/logo.svg"> hf log
+    </a>
+    <div class="nav navbar-nav navbar-left">
+      <button class="btn btn-default navbar-btn" [disabled]="running()" (click)="onClickStart()"><span class="glyphicon glyphicon-play"></span></button>
+      <button class="btn btn-default navbar-btn" [disabled]="!running()" (click)="onClickPause()"><span class="glyphicon glyphicon-pause"></span></button>
+      <button class="btn btn-default navbar-btn" (click)="onClickRefresh()"><span class="glyphicon glyphicon-remove"></span></button>
+    </div>
+    <div class="nav navbar-nav navbar-right">
+      <button class="btn btn-default navbar-btn" (click)="onClickSetting()">Settings</button>
+    </div>
+  </div>
+</nav>
+<app-about-dialog></app-about-dialog>
+<app-setting-dialog></app-setting-dialog>
