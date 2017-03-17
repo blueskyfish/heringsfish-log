@@ -1,0 +1,19 @@
+<div (click)="hide()" class="modal fade modal-backdrop" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+     [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="hide()"><span aria-hidden="true">&times;</span></button>
+        <h1>Heringsfish Log <small>0.0.1</small></h1>
+      </div>
+      <div class="modal-body">
+        <p>
+          The small browser for show the log message from the Payara (or Glassfish) application server.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="hide()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

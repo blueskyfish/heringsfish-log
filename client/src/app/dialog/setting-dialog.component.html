@@ -1,0 +1,31 @@
+<div class="modal fade modal-backdrop" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+     [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="hide()"><span aria-hidden="true">&times;</span></button>
+        <h2>Setting of Log Columns</h2>
+      </div>
+      <div class="modal-body">
+        <h3>Log Columns</h3>
+        <div class="form-log">
+          <div class="form-log-group" *ngFor="let item of logColumns">
+            <div class="form-log-item">
+              <app-toggle [name]="item.name" [checked]="item.show" (onChanged)="onChangedToggle(item, $event)"></app-toggle>
+            </div>
+            <div class="form-log-text">
+              {{ item.show ? 'Show' : 'Hide' }}
+            </div>
+            <div class="form-log-text" (click)="onToggleColumn(item)">
+              {{item.title}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="hide()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

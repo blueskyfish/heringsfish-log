@@ -1,0 +1,14 @@
+<main class="container-fluid message-table">
+  <table class="table table-bordered table-striped table-hover table-sm">
+    <thead>
+    <tr>
+      <th *ngFor="let name of logNames" ngClass="{{ name | columnStyle:'message-head' }}">{{ getColumnTitle(name)}} </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let message of logMessages; let i = index">
+      <td *ngFor="let name of logNames" ngClass="{{ name | columnStyle:'message' }}">{{ getColumnValue(i, message, name)}}</td>
+    </tr>
+    </tbody>
+  </table>
+</main>

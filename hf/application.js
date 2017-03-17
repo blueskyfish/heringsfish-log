@@ -11,6 +11,7 @@ const Transform = require('stream').Transform;
 
 
 const express  = require('express');
+const nunjucks = require('nunjucks');
 
 const logger   = require('./logger');
 const tail     = require('./tail-stream');
@@ -37,22 +38,32 @@ function startApp(projectPath, currentPath, settings) {
   // socket io
   io.on('connection', (socket) => {
 
-    // TODO info message of the socket !!
-
-    // TODO send configuration and info to the client
-    // socket.emit('config', {});
+    logger.info('User connect (%s)', socket);
 
     socket.on('disconnect', () => {
 
-      // TODO info message -> user is disconnected
+      logger.info('User disconnect');
+
     });
   });
 
-  app.use('/app', express.static(path.join(projectPath, '/app')));
+  nunjucks.configure(path.join(projectPath, 'app'), {
+    autoescape: true,
+    express: app
+  });
 
   app.get('/', (req, res) => {
     res.redirect('/app/index.html');
   });
+
+  app.get('/app/index.html', (req, res) => {
+    res.render('index.html', {
+      severPort: settings.serverPort
+    });
+  });
+
+  // client sources in location "/app"
+  app.use('/app', express.static(path.join(projectPath, 'app')));
 
   /**
    * @type {TailOptions}
