@@ -12,7 +12,10 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app-root.component.html'
+  template: `
+<app-nav-bar></app-nav-bar>
+<app-message-table></app-message-table>
+`
 })
 export class AppRoot {
 
